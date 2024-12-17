@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Signup</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .volunteer-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .volunteer-interests {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .interest-option {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+        .interest-option.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+        .availability-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .availability-option {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .availability-option.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-background"></div>
+    <div class="volunteer-container">
+        <h2>Volunteer Signup</h2>
+        
+        <div class="nav-links">
+                <a href="homepage.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="available_pets.html" class="nav-link"><i class="fas fa-paw"></i> Adopt</a> 
+                <a href="community.html" class="nav-link"><i class="fas fa-user-plus"></i> Community</a>
+                <a href="petCare.html" class="nav-link"><i class="fas fa- paw"></i>Pet Care</a>
+                <a href = "VolunteerSignup.html" class = "nav-link"><i class = "fas fa-user-plus"></i>Volunteer here</a>
+        <form id="volunteerForm" class="login-form">
+            <div class="form-group">
+                <label for="fullName"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-heart"></i> Areas of Interest</label>
+                <div class="volunteer-interests">
+                    <div class="interest-option" data-interest="animal-care">
+                        <i class="fas fa-paw"></i> Animal Care
+                    </div>
+                    <div class="interest-option" data-interest="admin">
+                        <i class="fas fa-clipboard"></i> Administrative
+                    </div>
+                    <div class="interest-option" data-interest="events">
+                        <i class="fas fa-calendar"></i> Event Support
+                    </div>
+                    <div class="interest-option" data-interest="fundraising">
+                        <i class="fas fa-donate"></i> Fundraising
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> Availability</label>
+                <div class="availability-grid">
+                    <div class="availability-option" data-day="weekdays-morning">Weekdays Morning</div>
+                    <div class="availability-option" data-day="weekdays-afternoon">Weekdays Afternoon</div>
+                    <div class="availability-option" data-day="weekdays-evening">Weekdays Evening</div>
+                    <div class="availability-option" data-day="weekends-morning">Weekends Morning</div>
+                    <div class="availability-option" data-day="weekends-afternoon">Weekends Afternoon</div>
+                    <div class="availability-option" data-day="weekends-evening">Weekends Evening</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="additionalInfo"><i class="fas fa-comment"></i> Additional Information</label>
+                <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit Volunteer Application</button>
+        </form>
+    </div>
+
+    <script>
+        // Multiple selection for interests and availability
+        const interestOptions = document.querySelectorAll('.interest-option');
+        const availabilityOptions = document.querySelectorAll('.availability-option');
+
+        function setupMultiSelect(options) {
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+        }
+
+        setupMultiSelect(interestOptions);
+        setupMultiSelect(availabilityOptions);
+
+        // Form submission handler
+        document.getElementById('volunteerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect selected interests
+            const selectedInterests = Array.from(interestOptions)
+                .filter(option => option.classList.contains('selected'))
+                .map(option => option.dataset.interest);
+
+            // Collect available times
+            const selectedAvailability = Array.from(availabilityOptions)
+                .filter(option => option.classList.contains('selected'))
+                .map(option => option.dataset.day);
+
+            // Here you would typically send this data to a backend PHP script
+            console.log('Volunteer Application:', {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                interests: selectedInterests,
+                availability: selectedAvailability,
+                additionalInfo: document.getElementById('additionalInfo').value
+            });
+
+            alert('Volunteer application submitted! We will review and contact you soon.');
+        });
+    </script>
+</body>
+</html>

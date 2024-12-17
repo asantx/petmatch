@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawFect Match - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --overlay-opacity: 0.7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+            filter: brightness(0.6) contrast(1.1);
+            animation: backgroundMove 20s infinite alternate;
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .site-container {
+            display: flex;
+            position: relative;
+            z-index: 1;
+        }
+
+        .side-navigation {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.9);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .side-navigation .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .side-navigation .logo img {
+            margin-right: 10px;
+        }
+
+        .side-navigation .nav-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-navigation .nav-link {
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.8);
+            min-height: 100vh;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section, .pet-facts, .pet-gallery {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .hero-section h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .fact-cards {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fact-card {
+            flex: 1;
+            margin: 0 10px;
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .main-footer {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-left: 250px;
+            width: calc(100% - 250px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-slideshow" id="backgroundSlideshow"></div>
+
+    <div class="site-container">
+        <nav class="side-navigation">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+            
+                <span>PawFect Match</span>
+            </div>
+            <div class="nav-links">
+    
+                
+                <a href="login.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="register.html" class="nav-link"><i class="fas fa-user-plus"></i> Sign Up</a>
+                
+                
+            </div>
+        </nav>
+
+        <main class="main-content home-content">
+            <section class="hero-section container">
+                <h1>Discover the Joy of Pet Companionship</h1>
+                <p class="hero-text">Pets bring love, happiness, and countless benefits to our lives. Learn why!</p>
+            </section>
+
+            <section class="pet-facts container">
+                <h2>Why Pets Make Life Better</h2>
+                <div class="fact-cards">
+                    <div class="fact-card">
+                        <i class="fas fa-heart feature-icon"></i>
+                        <h3>Emotional Support</h3>
+                        <p>Pets provide unconditional love and can help reduce stress, anxiety, and depression.</p>
+                    </div>
+                    <div class="fact-card">
+                        <i class="fas fa-running feature-icon"></i>
+                        <h3>Physical Health</h3>
+                        <p>Dog owners walk more, leading to improved cardiovascular health and increased physical activity.</p>
+                    </div>
+                    <div class="fact-card">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3>Social Connection</h3>
+                        <p>Pets can help you meet new people and provide a sense of community and companionship.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pet-gallery container">
+                <h2>Meet Some of Our Adorable Friends</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://i.pinimg.com/736x/fc/79/bb/fc79bbbe1b60fb4594c9e4d7b0662f35.jpg" alt="Cute Dog">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.pinimg.com/736x/14/f1/93/14f19348ec6fb9af42ec317620ec7384.jpg" alt="Adorable Cat">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.pinimg.com/736x/78/44/8a/78448a1bd588f0435cbadcca2e596d02.jpg" alt="Playful Puppy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.pinimg.com/736x/ec/f2/87/ecf28747a5d89a04ccdd6c6f01d78da4.jpg" alt="Cuddly Kitten">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content container">
+            <div class="footer-section">
+                <h3>PawFect Match</h3>
+                <p>Making perfect matches between pets and families since 2024.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="available_pets.html">Adopt</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PawFect Match. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const backgroundSlideshow = document.getElementById('backgroundSlideshow');
+        const images = [
+            'https://i.pinimg.com/736x/fc/79/bb/fc79bbbe1b60fb4594c9e4d7b0662f35.jpg',
+            'https://i.pinimg.com/736x/14/f1/93/14f19348ec6fb9af42ec317620ec7384.jpg',
+            'https://i.pinimg.com/736x/78/44/8a/78448a1bd588f0435cbadcca2e596d02.jpg',
+            'https://i.pinimg.com/736x/ec/f2/87/ecf28747a5d89a04ccdd6c6f01d78da4.jpg'
+        ];
+
+        let currentIndex = 0;
+
+        function changeBackground() {
+            backgroundSlideshow.style.backgroundImage = `url('${images[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Initial background
+        changeBackground();
+
+        // Change background every 5 seconds
+        setInterval(changeBackground, 5000);
+    </script>
+</body>
+</html>

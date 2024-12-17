@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption - Registration</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="login-container">
+    <div class="body-background"></div>
+    
+    <div class="form-card">
+        <div class="logo-section">
+            <i class="fas fa-paw"></i>
+            <h1>Pet Adoption</h1>
+        </div>
+        
+        <h2 class="form-subtitle">Create Your Account</h2>
+        
+        <form class="login-form" action="register.php" method="POST">
+            <div class="form-group">
+                <label for="fullName"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <div class="password-input-group">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                        <i class="fas fa-eye-slash" id="passwordToggle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="termsAgree" required>
+                    I agree to the Terms and Conditions
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+        
+        <div class="auth-footer">
+            Already have an account? 
+            <a href="login.html" class="register-link">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        </div>
+        
+        <div class="back-to-home">
+            <a href="index.html">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordToggle = document.getElementById('passwordToggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+</body>
+</html>

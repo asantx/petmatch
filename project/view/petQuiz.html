@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Matching Quiz</title>
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+        }
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .option {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+        .option:hover {
+            transform: scale(1.05);
+            background: var(--primary-color);
+            color: white;
+        }
+        .option.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-background"></div>
+    <div class="container quiz-container">
+        <h2>Find Your Perfect Pet Companion</h2>
+        <div id="quiz">
+            <div class="question" id="question1">
+                <h3>1. How active is your lifestyle?</h3>
+                <div class="options">
+                    <div class="option" data-score-dog="3" data-score-cat="1" data-score-bird="2">Very Active - Love Long Walks</div>
+                    <div class="option" data-score-dog="2" data-score-cat="3" data-score-bird="1">Moderate - Some Exercise</div>
+                    <div class="option" data-score-dog="1" data-score-cat="2" data-score-bird="3">Relaxed - Prefer Indoor Activities</div>
+                    <div class="option" data-score-dog="0" data-score-cat="4" data-score-bird="0">Mostly Sedentary</div>
+                </div>
+            </div>
+
+            <div class="question" id="question2" style="display:none;">
+                <h3>2. How much space do you have?</h3>
+                <div class="options">
+                    <div class="option" data-score-dog="3" data-score-cat="2" data-score-bird="1">Large Home with Yard</div>
+                    <div class="option" data-score-dog="2" data-score-cat="3" data-score-bird="2">Apartment or Small Space</div>
+                    <div class="option" data-score-dog="1" data-score-cat="1" data-score-bird="3">Very Small Living Area</div>
+                </div>
+            </div>
+
+            <div class="question" id="question3" style="display:none;">
+                <h3>3. How much time can you dedicate daily?</h3>
+                <div class="options">
+                    <div class="option" data-score-dog="3" data-score-cat="1" data-score-bird="2">Several Hours Daily</div>
+                    <div class="option" data-score-dog="2" data-score-cat="2" data-score-bird="1">1-2 Hours Daily</div>
+                    <div class="option" data-score-dog="1" data-score-cat="3" data-score-bird="3">Limited Time</div>
+                </div>
+            </div>
+
+            <div id="result" style="display:none;">
+                <h3>Your Perfect Pet Match</h3>
+                <div id="match-result"></div>
+                <button id="restart" class="btn btn-primary">Take Quiz Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = document.querySelectorAll('.question');
+        const options = document.querySelectorAll('.option');
+        const resultSection = document.getElementById('result');
+        const matchResult = document.getElementById('match-result');
+        let currentQuestion = 0;
+        let scores = { dog: 0, cat: 0, bird: 0 };
+
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected from other options in same question
+                this.closest('.question').querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+
+                // Update scores
+                scores.dog += parseInt(this.getAttribute('data-score-dog') || 0);
+                scores.cat += parseInt(this.getAttribute('data-score-cat') || 0);
+                scores.bird += parseInt(this.getAttribute('data-score-bird') || 0);
+
+                // Move to next question or show result
+                setTimeout(() => {
+                    if (currentQuestion < questions.length - 1) {
+                        questions[currentQuestion].style.display = 'none';
+                        currentQuestion++;
+                        questions[currentQuestion].style.display = 'block';
+                    } else {
+                        determineMatch();
+                    }
+                }, 300);
+            });
+        });
+
+        function determineMatch() {
+            questions[currentQuestion].style.display = 'none';
+            resultSection.style.display = 'block';
+
+            const maxScore = Math.max(scores.dog, scores.cat, scores.bird);
+            let match = '';
+
+            if (scores.dog === maxScore) {
+                match = `
+                    <h4>🐶 Dog is Your Perfect Match!</h4>
+                    <p>You're an active person who loves companionship and outdoor activities. A dog would be your ideal pet!</p>
+                `;
+            } else if (scores.cat === maxScore) {
+                match = `
+                    <h4>🐱 Cat is Your Perfect Match!</h4>
+                    <p>You appreciate independence and calm environments. A cat would be your perfect companion!</p>
+                `;
+            } else {
+                match = `
+                    <h4>🦜 Bird is Your Perfect Match!</h4>
+                    <p>You enjoy intelligent, low-maintenance pets with personality. A bird would be a great addition to your home!</p>
+                `;
+            }
+
+            matchResult.innerHTML = match;
+        }
+
+        document.getElementById('restart').addEventListener('click', () => {
+            // Reset everything
+            currentQuestion = 0;
+            scores = { dog: 0, cat: 0, bird: 0 };
+            resultSection.style.display = 'none';
+            questions.forEach((q, index) => {
+                q.style.display = index === 0 ? 'block' : 'none';
+            });
+            options.forEach(opt => opt.classList.remove('selected'));
+        });
+    </script>
+</body>
+</html>

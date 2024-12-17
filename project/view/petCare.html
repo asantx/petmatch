@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Care Resources</title>
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .resources-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .resource-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .resource-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all var(--transition-speed);
+            cursor: pointer;
+        }
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .resource-content {
+            display: none;
+            margin-top: 20px;
+        }
+        .resource-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <nav class="side-navigation">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                <span>PawFect Match</span>
+                <div class="nav-links">
+                    <a href="homepage.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                    <a href="available_pets.html" class="nav-link"><i class="fas fa-paw"></i> Adopt</a>
+                    
+                    <a href="community.html" class="nav-link"><i class="fas fa-user-plus"></i> Community</a>
+                    <a href="petCare.html" class="nav-link"><i class="fas fa- paw"></i>Pet Care</a>
+                    <a href = "VolunteerSignup.html" class = "nav-link"><i class = "fas fa-user-plus"></i>Volunteer here</a>
+    
+
+               
+            </div>
+            
+            </div>
+    <div class="body-background"></div>
+    <div class="resources-container">
+        <h2>Pet Care Resources</h2>
+        
+        <div class="resource-categories">
+            <div class="resource-card" data-category="nutrition">
+                <h3>Nutrition</h3>
+                <p>Comprehensive guides on pet diet and nutrition</p>
+            </div>
+            <div class="resource-card" data-category="training">
+                <h3>Training</h3>
+                <p>Tips and techniques for pet training</p>
+            </div>
+            <div class="resource-card" data-category="health">
+                <h3>Health & Wellness</h3>
+                <p>Medical care and preventive health information</p>
+            </div>
+        </div>
+
+        <div id="resourceContent" class="resource-content">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        const resourceCards = document.querySelectorAll('.resource-card');
+        const resourceContent = document.getElementById('resourceContent');
+
+        resourceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active from all cards
+                resourceCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+
+                // Load content based on category
+                const category = this.dataset.category;
+                loadResourceContent(category);
+            });
+        });
+
+        function loadResourceContent(category) {
+            const contents = {
+                nutrition: `
+                    <h3>Pet Nutrition Guide</h3>
+                    <div class="feature-card">
+                        <h4>Balanced Diet Basics</h4>
+                        <p>Ensure your pet receives proper nutrition with these key guidelines:</p>
+                        <ul>
+                            <li>Choose age-appropriate food</li>
+                            <li>Monitor portion sizes</li>
+                            <li>Provide fresh water daily</li>
+                            <li>Consult with a veterinarian about specific dietary needs</li>
+                        </ul>
+                    </div>
+                `,
+                training: `
+                    <h3>Pet Training Techniques</h3>
+                    <div class="feature-card">
+                        <h4>Positive Reinforcement Training</h4>
+                        <p>Effective training methods include:</p>
+                        <ul>
+                            <li>Use treats and praise</li>
+                            <li>Be consistent with commands</li>
+                            <li>Start training early</li>
+                            <li>Keep training sessions short</li>
+                        </ul>
+                    </div>
+                `,
+                health: `
+                    <h3>Pet Health Wellness</h3>
+                    <div class="feature-card">
+                        <h4>Preventive Health Care</h4>
+                        <p>Maintain your pet's health with these tips:</p>
+                        <ul>
+                            <li>Regular veterinary check-ups</li>
+                            <li>Keep vaccinations up to date</li>
+                            <li>Maintain dental hygiene</li>
+                            <li>Regular exercise</li>
+                        </ul>
+                    </div>
+                `
+            };
+
+            resourceContent.innerHTML = contents[category];
+            resourceContent.classList.add('active');
+        }
+    </script>
+</body>
+</html>
